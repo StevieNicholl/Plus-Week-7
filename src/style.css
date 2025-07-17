@@ -1,0 +1,44 @@
+body {
+  background-color: rgb(249, 247, 254);
+  font-family: "Nunito Sans", sans-serif;
+}
+
+header {
+  padding: 0 0 30px 0;
+}
+
+.main-block {
+  background-color: #fff;
+  max-width: 600px;
+  margin: 50px auto;
+  box-shadow: 0 30px 50px rgba(65, 50, 100, 0.08);
+  padding: 30px;
+  border-radius: 12px;
+}
+
+.search-input {
+  background-color: rgb(249, 247, 254);
+  border: none;
+  border-radius: 6px;
+  width: 80%;
+  font-size: 16px;
+  padding: 15px 20px;
+}
+
+.search-button {
+  background-color: #3a3aff;
+  color: #fff;
+  padding: 15px 20px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+}
+
+footer {
+  text-align: center;
+  padding: 30px 0 0 0;
+}
+
+a {
+  color: #3a3aff;
+}
