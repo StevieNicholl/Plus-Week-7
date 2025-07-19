@@ -26,7 +26,7 @@ header {
 }
 
 .search-button {
-  background-color: #3a3aff;
+  background-color: #009e60;
   color: #fff;
   padding: 15px 20px;
   font-size: 16px;
@@ -40,5 +40,48 @@ footer {
 }
 
 a {
-  color: #3a3aff;
+  color: #009e60;
+}
+
+.data-blocks {
+  display: flex;
+  justify-content: space-between;
+}
+
+main {
+  padding: 30px;
+}
+
+.data-city {
+  margin: 0;
+  font-size: 38px;
+  line-height: 48px;
+}
+
+.data-details {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.data-details strong {
+  color: #ff44ab;
+}
+
+.data-temp-container {
+  display: flex;
+}
+
+.data-temp {
+  font-size: 88px;
+  font-weight: bold;
+}
+
+.data-icon {
+  font-size: 44px;
+  margin-top: 22px;
+}
+
+.data-unit {
+  margin-top: 20px;
+  font-size: 28px;
 }
