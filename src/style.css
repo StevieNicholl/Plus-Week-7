@@ -49,7 +49,7 @@ a {
 }
 
 main {
-  padding: 30px;
+  padding: 20px;
 }
 
 .data-city {
@@ -84,4 +84,8 @@ main {
 .data-unit {
   margin-top: 20px;
   font-size: 28px;
+}
+
+.hidden-element {
+  display: none;
 }
