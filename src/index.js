@@ -29,7 +29,6 @@ function getDayTime() {
 function updateData(response) {
   let dataBlocks = document.querySelector("#data-blocks");
 
-  console.log(response.data);
   if (response.data.message != null) {
     dataBlocks.classList.add("hidden-element");
     setStatus(true, response.data.message);
@@ -53,6 +52,10 @@ function updateData(response) {
 
     let dataTemp = document.querySelector("#data-temp");
     dataTemp.innerHTML = Math.round(response.data.temperature.current);
+
+    let iconContainer = document.querySelector("#icon-container");
+    let iconImg = `<img class="data-icon" src="${response.data.condition.icon_url}"/>`;
+    iconContainer.innerHTML = iconImg;
 
     dataBlocks.classList.remove("hidden-element");
   } else setStatus(true, "Invalid Input");
