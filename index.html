@@ -28,22 +28,25 @@
         </form>
       </header>
       <main>
-        <div class="data-blocks">
+        <div class="data-blocks hidden-element" id="data-blocks">
           <div>
             <h1 class="data-city" id="data-city">Paris</h1>
             <p class="data-details">
-              Tuesday 14:49, scattered clouds
+              <span id="day-time">Tuesday 14:49</span>,
+              <span id="data-condition">scattered clouds</span>
               <br />
-              Humidity: <strong>66%</strong>, Wind: <strong>3.13km/h</strong>
+              Humidity: <strong id="data-humidity">66</strong>, Wind:
+              <strong id="data-wind">3.13</strong>
             </p>
           </div>
           <div class="data-temp-container">
             <div class="data-icon">🌤️</div>
-            <div class="data-temp">12</div>
+            <div class="data-temp" id="data-temp">12</div>
 
             <div class="data-unit">°C</div>
           </div>
         </div>
+        <div id="status-block" class="hidden-element">Invalid City</div>
       </main>
       <footer>
         Coded by
