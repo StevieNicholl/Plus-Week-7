@@ -19,6 +19,7 @@ function getDayTime() {
     "Saturday",
     "Sunday",
   ];
+
   let now = new Date();
 
   return (
@@ -27,6 +28,7 @@ function getDayTime() {
 }
 
 function updateData(response) {
+  console.log(response.data);
   let dataBlocks = document.querySelector("#data-blocks");
 
   if (response.data.message != null) {
@@ -75,6 +77,23 @@ function handleSearch(event) {
     searchCity(searchInput.value);
   }
 }
+
+function getForecastDayHTML(dayNum) {
+  let weekDays = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"];
+  return (
+    `<div class="forecast-data"><div class="forecast-day">${weekDays[dayNum]}</div>` +
+    `<div class="forecast-icon">🌞</div>` +
+    `<div class="forecast-temps"><div class="forecast-temp-high">100°</div><div class="forecast-temp-low">1°</div></div></div>`
+  );
+}
+
+let forecastData = document.querySelector("#forecast-data-container");
+forecastData.innerHTML =
+  getForecastDayHTML(1) +
+  getForecastDayHTML(2) +
+  getForecastDayHTML(3) +
+  getForecastDayHTML(4) +
+  getForecastDayHTML(5);
 
 let searchFrom = document.querySelector("#search-form");
 searchFrom.addEventListener("click", handleSearch);
