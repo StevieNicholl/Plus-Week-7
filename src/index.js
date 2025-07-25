@@ -1,26 +1,31 @@
+let now;
+let todayDay;
+
 function setStatus(show, message) {
   let statusBlock = document.querySelector("#status-block");
   let dataBlocks = document.querySelector("#data-blocks");
+  let forecastData = document.querySelector("#forecast-data-container");
 
   if (show === true) {
     statusBlock.innerHTML = message;
     statusBlock.classList.remove("hidden-element");
     dataBlocks.classList.add("hidden-element");
-  } else statusBlock.classList.add("hidden-element");
+    forecastData.innerHTML = "";
+  } else {
+    statusBlock.classList.add("hidden-element");
+  }
 }
 
 function getDayTime() {
   let weekDays = [
+    "Sunday",
     "Monday",
     "Tuesday",
     "Wednesday",
     "Thursday",
     "Friday",
     "Saturday",
-    "Sunday",
   ];
-
-  let now = new Date();
 
   return (
     weekDays[now.getDay()] + ", " + now.getHours() + ":" + now.getMinutes()
@@ -28,11 +33,9 @@ function getDayTime() {
 }
 
 function updateData(response) {
-  console.log(response.data);
   let dataBlocks = document.querySelector("#data-blocks");
 
   if (response.data.message != null) {
-    dataBlocks.classList.add("hidden-element");
     setStatus(true, response.data.message);
   } else if (response.data.city != null) {
     setStatus(false);
@@ -63,11 +66,32 @@ function updateData(response) {
   } else setStatus(true, "Invalid Input");
 }
 
+function updateFCData(response) {
+  let weekDays = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
+  let forecastData = document.querySelector("#forecast-data-container");
+  for (let index = 0; index < 5; index++) {
+    forecastData.innerHTML +=
+      `<div class="forecast-data"><div class="forecast-day">${
+        weekDays[(todayDay + index + 1) % 7]
+      }</div>` +
+      `<div class="forecast-icon"> <img src="${response.data.daily[index].condition.icon_url}"/></div>` +
+      `<div class="forecast-temps"><div class="forecast-temp-high">${Math.round(
+        response.data.daily[index].temperature.maximum
+      )}°</div><div class="forecast-temp-low">${Math.round(
+        response.data.daily[index].temperature.minimum
+      )}°</div></div></div>`;
+  }
+}
+
 function searchCity(city) {
   let apiKey = "a20do60b19f65413at1b9bca4101844c";
   let request = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+  let fcRequest = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+  now = new Date();
+  todayDay = now.getDay();
   setStatus(true, "Searching...");
   axios.get(request).then(updateData);
+  axios.get(fcRequest).then(updateFCData);
 }
 
 function handleSearch(event) {
@@ -77,23 +101,6 @@ function handleSearch(event) {
     searchCity(searchInput.value);
   }
 }
-
-function getForecastDayHTML(dayNum) {
-  let weekDays = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"];
-  return (
-    `<div class="forecast-data"><div class="forecast-day">${weekDays[dayNum]}</div>` +
-    `<div class="forecast-icon">🌞</div>` +
-    `<div class="forecast-temps"><div class="forecast-temp-high">100°</div><div class="forecast-temp-low">1°</div></div></div>`
-  );
-}
-
-let forecastData = document.querySelector("#forecast-data-container");
-forecastData.innerHTML =
-  getForecastDayHTML(1) +
-  getForecastDayHTML(2) +
-  getForecastDayHTML(3) +
-  getForecastDayHTML(4) +
-  getForecastDayHTML(5);
 
 let searchFrom = document.querySelector("#search-form");
 searchFrom.addEventListener("click", handleSearch);

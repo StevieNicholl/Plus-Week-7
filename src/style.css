@@ -106,6 +106,12 @@ main {
 
 .forecast-icon {
   text-align: center;
+  background-color: #dffaf2;
+  border-radius: 10px;
+}
+
+.forecast-icon img {
+  width: 50px;
 }
 
 .forecast-temps {
